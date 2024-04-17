@@ -17,27 +17,59 @@ const myMap = (arr, callback) => {
 
 const myFind = (arr, callback) => {
   for (let i = 0; i < arr.length; i++) {
-    const result = callback(arr[i], i);
-    if (result === true)
-      return arr;
+    if (callback(arr[i]))
+      return arr[i];
   };
+  return undefined;
 }
-const myFilter = () => {
+
+const myFilter = (arr, callback) => {
+  let newArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (callback(arr[i])) {
+      newArray.push(arr[i]);
+    }
+  };
+  return newArray;
+}
+
+const sortWords = (arr) => {
+  let newArray = [...arr]
+  return newArray.sort();
 };
 
-const sortWords = () => {
+const sortNumbers = (arr) => {
+  let newArray = [...arr]
+  return newArray.sort((a, b) => (a - b));
 };
 
-const sortNumbers = () => {
+const sortNumbersBetter = (arr, isDescending) => {
+  let newArray = [...arr]
+  if (isDescending) {
+    return newArray.sort((a, b) => (b - a));
+  }
+  return newArray.sort((a, b) => (a - b))
 };
 
-const sortNumbersBetter = () => {
+const sortUsersByOrder = (arr) => {
+  let newArray = [...arr]
+  return newArray.sort((a, b) => (a.order - b.order));
 };
 
-const sortUsersByOrder = () => {
-};
-
-const sortUsersByName = () => {
+const sortUsersByName = (arr) => {
+  let newArray = [...arr]
+  newArray.sort((a, b) => {
+    const nameA = a.name
+    const nameB = b.name
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  return newArray
 };
 
 module.exports = {
